@@ -9,13 +9,13 @@ export const dbase=()=>{
             {
               "id": "30052979b",
               "name": "Смарт-часы Apple Watch S6 44mm Space Gray Aluminum Case with Black Sport Band",
-              "photo": "../cross-sell-dbase/img/30052979b.jpg",
+              "photo": "../../cross-sell-dbase/img/30052979b.jpg",
               "price": "39490"
             },
             {
               "id": "50047745b",
               "name": "Наушники Apple EarPods with Lightning Connector",
-              "photo": "../cross-sell-dbase/img/50047745b.jpg",
+              "photo": "cross-sell-dbase/img/50047745b.jpg",
               "price": "1990"
             },
             {
@@ -27,7 +27,7 @@ export const dbase=()=>{
             {
               "id": "50126638b",
               "name": "Наушники Apple AirPods w/Charging Case",
-              "photo": "../cross-sell-dbase/img/50126638b.jpg",
+              "photo": "./cross-sell-dbase/img/50126638b.jpg",
               "price": "12990"
             },
             {
