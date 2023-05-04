@@ -1,5 +1,5 @@
 import { render } from "./render.js";
-
+import {dbase} from "./dbase.js"
 export const getData = () => {
   const btn = document.querySelector(".cross-sell__add");
   let stack = 4;
@@ -20,20 +20,22 @@ export const getData = () => {
     render(sliceData(data, newStack));
   };
 
-  const getGoods = () => {
-    fetch("../cross-sell-dbase/dbase.json")
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("Плохи дела!!!");
-        }
-      })
-      .then((data) => {
-        filter(data);
-      })
-      .catch((error) => console.error(error.message));
-  };
-  btn.addEventListener("click", getGoods);
-  getGoods();
+  // const getGoods = () => {
+  //   fetch("../cross-sell-dbase/dbase.json")
+  //     .then((response) => {
+  //       if (response.ok) {
+  //         return response.json();
+  //       } else {
+  //         throw new Error("Плохи дела!!!");
+  //       }
+  //     })
+  //     .then((data) => {
+  //       filter(data);
+  //     })
+  //     .catch((error) => console.error(error.message));
+  // };
+  // btn.addEventListener("click", getGoods);
+  btn.addEventListener("click", ()=>{filter(dbase())});
+  // getGoods();
+  filter(dbase());
 };
