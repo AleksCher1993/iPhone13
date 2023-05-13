@@ -68,6 +68,7 @@ export const postDataBusket=()=>{
   };
   form.addEventListener("submit", (e) => {
     e.preventDefault();
+    console.log('submit');
     let sendObj = localStorage.getItem('busketItems')&&JSON.parse(localStorage.getItem("busketItems"));
 
     fetch("https://jsonplaceholder.typicode.com/albums/", {

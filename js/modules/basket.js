@@ -88,12 +88,13 @@ export const basket = () => {
     });
   };
   const closeModal = () => {
-    // modalBasket.addEventListener("click", (event) => {
-    //   if (!event.target.closest(".modal__block")) {
-    //     modalBasket.classList.remove("modal__basket-open");
-    //     document.body.classList.remove("locked");
-    //   }
-    // });
+    modalBasket.addEventListener("click", (event) => {
+      if (event.target.closest(".modal__basket")&&!event.target.closest(".modal__block")) {
+        modalBasket.classList.remove("modal__basket-open");
+        document.body.classList.remove("locked");
+        console.log('click');
+      }else console.log('no');
+    });
     close.addEventListener("click", () => {
       modalBasket.classList.remove("modal__basket-open");
       document.body.classList.remove("locked");
@@ -103,7 +104,6 @@ export const basket = () => {
     crossSell.addEventListener("click", (event) => {
       const target = event.target;
       if (target.closest(".button_buy")) {
-        // basketItemcounter.innerHTML = "";
         const btn = target.closest(".button_buy");
         const li = btn.closest("li");
         const h3 = li.querySelector("h3").innerText;
@@ -124,14 +124,8 @@ export const basket = () => {
           if (count === 0) {
             initialLocalStor(localObj, {}, { id, h3, p });
           }
-          // let res = localObj.reduce((r, item) => {
-          //   r += item.count;
-          //   return r;
-          // }, 0);
-          // basketItemcounter.innerHTML = res;
         } else {
           initialLocalStor(itemsArr, {}, { id, h3, p });
-          // basketItemcounter.innerHTML = "1";
         }
         itemsArr.length = 0;
         basketSvg.style.fill = "red";
@@ -158,14 +152,8 @@ export const basket = () => {
         if (count === 0) {
           initialLocalStor(localObj, {}, { id, h3, p });
         }
-        // let res = localObj.reduce((r, item) => {
-        //   r += item.count;
-        //   return r;
-        // }, 0);
-        // basketItemcounter.innerHTML = res;
       } else {
         initialLocalStor([], {}, { id, h3, p });
-        // basketItemcounter.innerHTML = "1";
       }
       itemsArr.length = 0;
       basketSvg.style.fill = "red";
@@ -178,7 +166,6 @@ export const basket = () => {
       const target = event.target;
       let tr=event.target.closest("tr")
       let span=tr.querySelector("span.res__count")
-      let price=''
       const localObj = JSON.parse(localStorage.getItem("busketItems"));
       if (target.closest(".btn__add")) {
         localObj.forEach((elem)=>{
