@@ -74,12 +74,12 @@ export const basket = () => {
     });
   };
   const closeModal = () => {
-    modalBasket.addEventListener("click", (event) => {
-      if (!event.target.closest(".modal__block")) {
-        modalBasket.classList.remove("modal__basket-open");
-        document.body.classList.remove("locked");
-      }
-    });
+    // modalBasket.addEventListener("click", (event) => {
+    //   if (!event.target.closest(".modal__block")) {
+    //     modalBasket.classList.remove("modal__basket-open");
+    //     document.body.classList.remove("locked");
+    //   }
+    // });
     close.addEventListener("click", () => {
       modalBasket.classList.remove("modal__basket-open");
       document.body.classList.remove("locked");
@@ -161,44 +161,31 @@ export const basket = () => {
       event.preventDefault();
       const target = event.target;
       let tr=event.target.closest("tr")
-      let tdPrice=tr.querySelector('td.td__price')
       let span=tr.querySelector("span.res__count")
       let price=''
-      
+      const localObj = JSON.parse(localStorage.getItem("busketItems"));
       if (target.closest(".btn__add")) {
-        span.innerHTML++
-        const localObj = JSON.parse(localStorage.getItem("busketItems"));
         localObj.forEach((elem)=>{
           if (tr.dataset.itemId===elem.id) {
-            price=elem.price
-            elem.price=(Number(price.slice(0,price.length-1))*span.innerHTML)+" ₽"
-            elem.count=span.innerHTML
-
+            elem.count++
           }
         })
-        price=Number(price.slice(0,price.length-1))
-        tdPrice.innerHTML=(price*span.innerHTML)+" ₽"
-
-        localStorage.setItem("busketItems", JSON.stringify(localObj));
       }
       if (target.closest(".btn__sub")) {
         if (span.innerHTML>0) { 
-          span.innerHTML--
-          const localObj = JSON.parse(localStorage.getItem("busketItems"));
           localObj.forEach((elem)=>{
             if (tr.dataset.itemId===elem.id) {
-              price=elem.price
-            elem.price=(Number(price.slice(0,price.length-1))*span.innerHTML)+" ₽"
-            elem.count=span.innerHTML
+              elem.count--
             }
           })
-          price=Number(price.slice(0,price.length-1))
-          tdPrice.innerHTML=(price*span.innerHTML)+" ₽"
-          localStorage.setItem("busketItems", JSON.stringify(localObj));
           
         }else 
         span.innerHTML=0
       }
+      localStorage.setItem("busketItems", JSON.stringify(localObj));
+      renderBusket(localObj)
+      rezultPrice(localObj)
+
     });
   };
   // ----------------------------------------------------------------------------
