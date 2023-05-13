@@ -16,6 +16,7 @@ export const basket = () => {
   );
   const formTbodyBusket = document.querySelector(".form__tbody_busket");
   const formResultPrice = formBusket.querySelector(".form__result_price");
+  const amenu=document.querySelector('.amenu__burger')
   const itemsArr = [];
 
   // -----------------------------------------------------------------------------
@@ -76,14 +77,17 @@ export const basket = () => {
       if (localStorage.getItem("busketItems")) {
         busketContainerPusto.classList.add("hidden");
         formBusket.classList.remove("hidden");
-        modalBusketSub.style.marginRight = "0";
+        modalBusketSub.classList.remove('mg-right');
         const localObj = JSON.parse(localStorage.getItem("busketItems"));
         renderBusket(localObj);
         rezultPrice(localObj);
       } else {
         busketContainerPusto.classList.remove("hidden");
         formBusket.classList.add("hidden");
-        modalBusketSub.style.marginRight = "30rem";
+        modalBusketSub.classList.add('mg-right');
+      }
+      if (amenu) {
+        amenu.classList.remove('amenu__burger-open')
       }
     });
   };

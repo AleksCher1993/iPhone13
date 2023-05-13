@@ -685,6 +685,12 @@ background-color: black;
 .btn__add:hover,.btn__sub:hover{
     background-color: #ececec;
 }
+.modal__busketSub{
+    margin-right: 0;
+}
+.modal__busketSub.mg-right{
+    margin-right: 30rem;
+}
 @media (max-width: 768px) {
     .modal__block{
         /* width: 35rem; */
@@ -694,7 +700,17 @@ background-color: black;
         width: 10rem;
     }
     .modal__busketSub{
-        margin-right:200px;
         font-size: 1.5rem;
+    }
+    .modal__busketSub.mg-right{
+        margin-right: 20rem;
+    }
+}
+@media (max-width: 478px) {
+   
+    
+    
+    .modal__busketSub.mg-right{
+        margin-right: 10rem;
     }
 }

@@ -11,12 +11,16 @@
 
 export const scrollToContent = () => {
   const dataSetElement = document.querySelectorAll("[data-sstc]");
+  const amenu=document.querySelector('.amenu__burger')
   seamless.polyfill();
 
   if (dataSetElement) {
     dataSetElement.forEach((elem) => {
       elem.addEventListener("click", (e) => {
         e.preventDefault();
+        if (amenu) {
+          amenu.classList.remove('amenu__burger-open')
+        }
         seamless.elementScrollIntoView(
           document.querySelector(elem.dataset.sstc),
           {
