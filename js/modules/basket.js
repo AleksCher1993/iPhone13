@@ -19,6 +19,20 @@ export const basket = () => {
   const itemsArr = [];
 
   // -----------------------------------------------------------------------------
+  const busketItemCounterHandl=(querysel)=>{
+    querysel.innerHTML=""
+    if (localStorage.getItem("busketItems")) {
+      const localObj = JSON.parse(localStorage.getItem("busketItems"));
+      let res = localObj.reduce((r, item) => {
+        r += item.count;
+        return r;
+      }, 0);
+      querysel.innerHTML = res;
+    }
+    else{
+
+    }
+  }
   const filterPrice=(price)=>{
     let pr=price.substring(0,price.length-1)
     return Number(pr)
@@ -89,7 +103,7 @@ export const basket = () => {
     crossSell.addEventListener("click", (event) => {
       const target = event.target;
       if (target.closest(".button_buy")) {
-        basketItemcounter.innerHTML = "";
+        // basketItemcounter.innerHTML = "";
         const btn = target.closest(".button_buy");
         const li = btn.closest("li");
         const h3 = li.querySelector("h3").innerText;
@@ -110,17 +124,18 @@ export const basket = () => {
           if (count === 0) {
             initialLocalStor(localObj, {}, { id, h3, p });
           }
-          let res = localObj.reduce((r, item) => {
-            r += item.count;
-            return r;
-          }, 0);
-          basketItemcounter.innerHTML = res;
+          // let res = localObj.reduce((r, item) => {
+          //   r += item.count;
+          //   return r;
+          // }, 0);
+          // basketItemcounter.innerHTML = res;
         } else {
           initialLocalStor(itemsArr, {}, { id, h3, p });
-          basketItemcounter.innerHTML = "1";
+          // basketItemcounter.innerHTML = "1";
         }
         itemsArr.length = 0;
         basketSvg.style.fill = "red";
+        busketItemCounterHandl(basketItemcounter)
       }
     });
   };
@@ -143,17 +158,18 @@ export const basket = () => {
         if (count === 0) {
           initialLocalStor(localObj, {}, { id, h3, p });
         }
-        let res = localObj.reduce((r, item) => {
-          r += item.count;
-          return r;
-        }, 0);
-        basketItemcounter.innerHTML = res;
+        // let res = localObj.reduce((r, item) => {
+        //   r += item.count;
+        //   return r;
+        // }, 0);
+        // basketItemcounter.innerHTML = res;
       } else {
         initialLocalStor([], {}, { id, h3, p });
-        basketItemcounter.innerHTML = "1";
+        // basketItemcounter.innerHTML = "1";
       }
       itemsArr.length = 0;
       basketSvg.style.fill = "red";
+      busketItemCounterHandl(basketItemcounter)
     });
   };
   const changeCountItemsAtBusket = () => {
@@ -185,6 +201,7 @@ export const basket = () => {
       localStorage.setItem("busketItems", JSON.stringify(localObj));
       renderBusket(localObj)
       rezultPrice(localObj)
+      busketItemCounterHandl(basketItemcounter)
 
     });
   };
