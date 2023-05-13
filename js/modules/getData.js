@@ -19,23 +19,6 @@ export const getData = () => {
     }
     render(sliceData(data, newStack));
   };
-
-  // const getGoods = () => {
-  //   fetch("../cross-sell-dbase/dbase.json")
-  //     .then((response) => {
-  //       if (response.ok) {
-  //         return response.json();
-  //       } else {
-  //         throw new Error("Плохи дела!!!");
-  //       }
-  //     })
-  //     .then((data) => {
-  //       filter(data);
-  //     })
-  //     .catch((error) => console.error(error.message));
-  // };
-  // btn.addEventListener("click", getGoods);
   btn.addEventListener("click", ()=>{filter(dbase())});
-  // getGoods();
   filter(dbase());
 };
