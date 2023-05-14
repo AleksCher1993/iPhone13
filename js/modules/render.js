@@ -43,6 +43,7 @@ export const renderBusket=(data)=>{
               <td>${item.name}</td>
               <td class="txt"><span class="btn__sub">-</span>&ensp;<span class="res__count">${item.count}</span>&ensp;<span class="btn__add">+</span></td>
               <td class="td__price">${filterPrice(item.price)*item.count} ₽</td>
+              <td class="td__delete">X</td>
             </tr>
               `
         );

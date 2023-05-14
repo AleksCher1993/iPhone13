@@ -691,9 +691,15 @@ background-color: black;
 .modal__busketSub.mg-right{
     margin-right: 30rem;
 }
+td.td__delete{
+    color: red;
+    font-weight: 700;
+    font-size: 20px;
+    padding-left: 5px;
+    cursor: pointer;
+}
 @media (max-width: 768px) {
     .modal__block{
-        /* width: 35rem; */
         
     }
     .busket__img{

@@ -17,6 +17,7 @@ export const basket = () => {
   const formTbodyBusket = document.querySelector(".form__tbody_busket");
   const formResultPrice = formBusket.querySelector(".form__result_price");
   const amenu=document.querySelector('.amenu__burger')
+
   const itemsArr = [];
 
   // -----------------------------------------------------------------------------
@@ -96,8 +97,8 @@ export const basket = () => {
       if (event.target.closest(".modal__basket")&&!event.target.closest(".modal__block")) {
         modalBasket.classList.remove("modal__basket-open");
         document.body.classList.remove("locked");
-        console.log('click');
-      }else console.log('no');
+        
+      }
     });
     close.addEventListener("click", () => {
       modalBasket.classList.remove("modal__basket-open");
@@ -186,8 +187,10 @@ export const basket = () => {
             }
           })
           
-        }else 
-        span.innerHTML=0
+        }else
+        {
+          span.innerHTML=0
+        }
       }
       localStorage.setItem("busketItems", JSON.stringify(localObj));
       renderBusket(localObj)
@@ -196,6 +199,39 @@ export const basket = () => {
 
     });
   };
+  const deleteItemHandler=(id)=>{
+    if (localStorage.getItem("busketItems")) {
+      let localObj=JSON.parse(localStorage.getItem("busketItems"))
+      let index=localObj.findIndex(elem=>{
+        if (elem.id===id) {
+          return elem
+        }
+      })
+
+      localObj.splice(index,1)
+      localStorage.setItem("busketItems",JSON.stringify(localObj))
+      renderBusket(localObj)
+    }
+  }
+  const deleteItem=()=>{
+    formTbodyBusket.addEventListener('click',(e)=>{
+      if (e.target.closest("td.td__delete")) {
+        formTbodyBusket.innerHTML=""
+        let tr=e.target.closest('tr')
+        let id=tr.dataset.itemId
+        deleteItemHandler(id)
+        let localObj=JSON.parse(localStorage.getItem("busketItems"))
+        if (localObj.length===0) {
+          localStorage.removeItem("busketItems")
+          basketItemcounter.innerHTML = "0";
+      basketSvg.style.fill = "";
+      busketContainerPusto.classList.remove("hidden");
+        formBusket.classList.add("hidden");
+        modalBusketSub.classList.add('mg-right');
+        }
+      }
+    })
+  }
   // ----------------------------------------------------------------------------
 
   addItemToBusket();
@@ -204,4 +240,5 @@ export const basket = () => {
   initialBusketCountItem(basketItemcounter);
   addSpecialItemToBusket();
   changeCountItemsAtBusket();
+  deleteItem()
 };
